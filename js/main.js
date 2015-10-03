@@ -81,6 +81,16 @@ function init() {
     conductor = new Kino.Conductor(bpm, dur, [0], loops, function(){}, function(){}, function(){});
     $("#sheet1").addClass("selected");
 
+    // check conductor loaded
+    var loadedTimer = window.setInterval(function() {
+        conductor.checkAllLoaded();
+        if (conductor.all_loaded) {
+            $("#playbackDetails").text("all loaded and good to go!");
+            window.clearInterval(loadedTimer);
+            console.log("cleared " + loadedTimer);
+        }
+    }, 100);
+
     // controls
     for (var i=0; i<loops.length; i++) {
         var id = "#sheet" + (i+1);
@@ -88,9 +98,12 @@ function init() {
             // console.log($(this));
             var idx = parseInt($(this).attr("index"));
             console.log(idx);
+
+            // display
             $(".sheet").removeClass("selected");
             $(this).toggleClass("selected");
 
+            // audio
             for (var j=0; j<loops.length; j++) {
                 loops[j].activated = false;
             }
@@ -100,9 +113,16 @@ function init() {
     }
     $("#startBtn").on("click", function() {
         conductor.start();
+        if (conductor.all_loaded) {
+            $("#playbackDetails").text("playing");
+        }
+        else {
+            $("#playbackDetails").text("audio not yet all loaded; try again soon~")
+        }
     });
     $("#stopBtn").on("click", function() {
         conductor.stop();
+        $("#playbackDetails").text("");
     });
 
 }
