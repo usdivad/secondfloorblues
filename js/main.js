@@ -2,14 +2,15 @@ var ctx = new AudioContext();
 var path = "assets/";
 var assets = [
     {
-        init: path+"01_init.mp3",
-        loop: path+"01_loop.mp3",
+        init: path+"01_init.wav",
+        loop: path+"01_loop.wav",
         img: path+"01.png",
-        dur: 370
+        dur: 710
     },
     {
         init: path+"02.mp3",
-        img: path+"02.png"
+        img: path+"02.png",
+        dur: 500
     },
     {
         init: path+"03.mp3",
@@ -35,7 +36,7 @@ var assets = [
 var loops = [];
 var conductor;
 var bpm = 10; // 1 beat per ms
-var dur = 370;
+var dur = assets[0].dur;
 
 function init() {
     console.log("hello");
