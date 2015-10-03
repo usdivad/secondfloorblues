@@ -78,7 +78,7 @@ function init() {
         // loops[i].loop.loop(1);
     }
     loops[0].activated = true;
-    conductor = new Kino.Conductor(bpm, dur, [0], loops, function(){}, function(){}, function(){});
+    conductor = new Kino.Conductor(bpm, dur, [0], loops, 1, displaySection, displaySection, function(){});
     $("#sheet1").addClass("selected");
 
     // check conductor loaded
@@ -108,7 +108,9 @@ function init() {
                 loops[j].activated = false;
             }
             loops[idx].activated = true;
-            conductor.setupTransition(bpm, assets[idx].dur, [0], loops);
+            conductor.setupTransition(bpm, assets[idx].dur, [0], loops, (idx+1));
+
+            // $("#playbackDetails").text("playing section " + (idx+1));
         });
     }
     $("#startBtn").on("click", function() {
@@ -125,6 +127,10 @@ function init() {
         $("#playbackDetails").text("");
     });
 
+}
+
+function displaySection() {
+    $("#playbackDetails").text("playing section " + conductor.section + "; next up is section " + conductor.nextSection);
 }
 
 window.onload = function() {
