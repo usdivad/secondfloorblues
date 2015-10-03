@@ -1,0 +1,22 @@
+.sheetimg {
+    opacity: 0.5;
+}
+
+.sheetimg:hover {
+    opacity: 0.75;
+}
+
+.selected {
+    background-color: green;
+    /*opacity: 1;*/
+    color: yellow;
+}
+
+.selected>.sheetimg {
+    opacity:0.9;
+}
+
+.sheet {
+    width: 600px;
+    padding: 20px;
+}
