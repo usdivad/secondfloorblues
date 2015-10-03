@@ -2,35 +2,47 @@ var ctx = new AudioContext();
 var path = "assets/";
 var assets = [
     {
-        init: path+"01_init.wav",
-        loop: path+"01_loop.wav",
+        init: path+"01_init.mp3",
+        loop: path+"01_loop.mp3",
         img: path+"01.png",
         dur: 710
     },
     {
-        init: path+"02.mp3",
+        init: path+"02_init.mp3",
+        loop: path+"02_loop.mp3",
         img: path+"02.png",
-        dur: 500
+        dur: 1427
     },
     {
-        init: path+"03.mp3",
-        img: path+"03.png"
+        init: path+"03_init.mp3",
+        loop: path+"03_loop.mp3",
+        img: path+"03.png",
+        dur: 717
     },
     {
-        init: path+"04.mp3",
-        img: path+"04.png"
+        init: path+"04_init.mp3",
+        loop: path+"04_loop.mp3",
+        img: path+"04.png",
+        dur: 711
     },
     {
-        init: path+"05.mp3",
-        img: path+"05.png"
+        init: path+"05_init.mp3",
+        loop: path+"05_loop.mp3",
+        img: path+"05.png",
+        dur: 2711
+
     },
     {
-        init: path+"06.mp3",
-        img: path+"06.png"
+        init: path+"06_init.mp3",
+        loop: path+"06_loop.mp3",
+        img: path+"06.png",
+        dur: 1333
     },
     {
-        init: path+"07.mp3",
-        img: path+"07.png"
+        init: path+"07_init.mp3",
+        loop: path+"07_loop.mp3",
+        img: path+"07.png",
+        dur: 1322
     }
 ];
 var loops = [];
@@ -75,6 +87,7 @@ function init() {
         $(id).on("click", function() {
             // console.log($(this));
             var idx = parseInt($(this).attr("index"));
+            console.log(idx);
             $(".sheet").removeClass("selected");
             $(this).toggleClass("selected");
 
@@ -85,6 +98,12 @@ function init() {
             conductor.setupTransition(bpm, assets[idx].dur, [0], loops);
         });
     }
+    $("#startBtn").on("click", function() {
+        conductor.start();
+    });
+    $("#stopBtn").on("click", function() {
+        conductor.stop();
+    });
 
 }
 
