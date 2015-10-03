@@ -21,9 +21,9 @@ div {
 }
 
 .selected {
-    background-color: green;
+    background-color: rgb(26, 153, 220);
     /*opacity: 1;*/
-    color: yellow;
+    color: white;
 }
 
 .selected>.sheetimg {
