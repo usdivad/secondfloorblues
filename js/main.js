@@ -78,7 +78,7 @@ function init() {
         // loops[i].loop.loop(1);
     }
     loops[0].activated = true;
-    conductor = new Kino.Conductor(bpm, dur, [0], loops, 1, displaySection, displaySection, function(){});
+    conductor = new Kino.Conductor(bpm, dur, [0], loops, 1, downbeatHandler, displaySection, function(){});
     $("#sheet1").addClass("selected");
 
     // check conductor loaded
@@ -131,6 +131,22 @@ function init() {
 
 function displaySection() {
     $("#playbackDetails").text("playing section " + conductor.section + "; next up is section " + conductor.nextSection);
+}
+
+// Transition to the following section by default
+// (this only occurs on first beat of section, so if user updates nextSection then that will override the default)
+function downbeatHandler() {
+    conductor.nextSection = Math.min(conductor.section+1, assets.length);
+    conductor.toNext = true;
+
+    // update highlighted display
+    // (NOTE: there's a bit of confusion as to whether highlight points to current or next atm..
+    //        .. maybe it points to current until the user clicks on another one?)
+    var id = "#sheet" + conductor.section;
+    $(".sheet").removeClass("selected");
+    $(id).toggleClass("selected");
+
+    displaySection();
 }
 
 window.onload = function() {
